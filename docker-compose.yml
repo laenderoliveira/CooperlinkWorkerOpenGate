@@ -29,10 +29,10 @@ services:
   mosquitto-worker:
     image: eclipse-mosquitto
     ports:
-      - "1883:1883"
-    volumes:
-      - ./Docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - ./Docker/mosquitto/passwordfile:/passwordfile
+      - "1313:1883"
+    #volumes:
+      #- ./Docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      #- ./Docker/mosquitto/passwordfile:/passwordfile
     networks:
         - worker-network
 
