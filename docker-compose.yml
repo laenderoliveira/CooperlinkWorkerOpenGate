@@ -1,0 +1,37 @@
+version: '3.7'
+
+
+networks:
+    worker-network:
+
+services:
+ 
+  mongo-worker:
+    image: tutum/mongodb
+    container_name: mongo-worker
+    ports:
+        - "27017:27017"
+        - "28017:28017"
+    environment:
+        AUTH: "no"
+    networks:
+        - worker-network
+   
+  service-worker:
+     container_name: worker-service
+     build:
+        context: .  
+     depends_on:
+        - mongo-worker
+        - mosquitto-worker
+     networks:
+        - worker-network
+
+  mosquitto-worker:
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+    networks:
+        - worker-network
+
+  
