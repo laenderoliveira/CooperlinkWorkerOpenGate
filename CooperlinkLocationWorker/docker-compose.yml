@@ -5,15 +5,17 @@ networks:
     worker-network:
 
 services:
- 
   mongo-worker:
-    image: tutum/mongodb
+    image: mongo
     container_name: mongo-worker
+    volumes:
+        - ./mongo/data:/data/db
     ports:
         - "27017:27017"
         - "28017:28017"
     environment:
-        AUTH: "no"
+        MONGO_INITDB_ROOT_USERNAME: laender
+        MONGO_INITDB_ROOT_PASSWORD: laender  
     networks:
         - worker-network
    

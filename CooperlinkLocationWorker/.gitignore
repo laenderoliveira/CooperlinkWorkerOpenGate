@@ -62,3 +62,6 @@ bundles/
 vendor/pkg/
 pyenv
 Vagrantfile
+
+# Others
+mongo/
