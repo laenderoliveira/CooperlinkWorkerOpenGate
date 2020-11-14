@@ -17,8 +17,8 @@ namespace CooperlinkLocationWorker.Infrastructure.Mqtt
         public BrokerMqtt(IBrokerMqttConfig brokerMqttConfig)
         {
             _brokerMqttConfig = brokerMqttConfig;
-            _client = new MqttClient(_brokerMqttConfig.Server);
-            _client.Connect(Guid.NewGuid().ToString());
+            _client = new MqttClient(_brokerMqttConfig.Server, _brokerMqttConfig.Port, false, null, null, MqttSslProtocols.None);
+            _client.Connect(Guid.NewGuid().ToString(), _brokerMqttConfig.Username, _brokerMqttConfig.Password);
             _topic = _brokerMqttConfig.Topic;
         }
 

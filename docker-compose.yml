@@ -8,11 +8,8 @@ services:
   mongo-worker:
     image: mongo
     container_name: mongo-worker
-    volumes:
-        - ./mongo/data:/data/db
     ports:
         - "27017:27017"
-        - "28017:28017"
     environment:
         MONGO_INITDB_ROOT_USERNAME: laender
         MONGO_INITDB_ROOT_PASSWORD: laender  
@@ -22,7 +19,7 @@ services:
   service-worker:
      container_name: worker-service
      build:
-        context: .  
+        context: ./CooperlinkLocationWorker/.  
      depends_on:
         - mongo-worker
         - mosquitto-worker
@@ -33,6 +30,9 @@ services:
     image: eclipse-mosquitto
     ports:
       - "1883:1883"
+    volumes:
+      - ./Docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./Docker/mosquitto/passwordfile:/passwordfile
     networks:
         - worker-network
 
